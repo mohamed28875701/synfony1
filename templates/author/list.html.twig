@@ -1,0 +1,28 @@
+{% if authors is defined and authors|length > 0 %}
+    <h1>number of autors : {{ authors|length }}</h1>
+    {% set total =0 %}
+<table>
+    <tr>
+        <td>id</td>
+        <td>picture</td>
+        <td>name</td>
+        <td>email</td>
+        <td>nb_books</td>
+    </tr>
+    {% for var in authors %}
+    <tr>
+        <td>{{ var.id|upper }}</td>
+        <td><img src="{{ asset(var.picture) }}"></td>
+        <td>{{ var.username|upper }}</td>
+        <td>{{ var.email|upper }}</td>
+        <td>{{ var.nb_books }}</td>
+        {% set total=total+var.nb_books %}
+    </tr>
+    {% endfor %}
+    <h1>nombre de livres total : {{ total }}</h1>
+</table>
+{% else  %}
+<h1>no authors found </h1>
+{% endif %}
+
+
