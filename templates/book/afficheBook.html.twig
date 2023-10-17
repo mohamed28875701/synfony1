@@ -1,0 +1,40 @@
+{% if publishedBooks is defined and publishedBooks|length>0 %}
+<h1>List Books</h1>
+
+<a href="{{ path('book_add')}}">Add</a>
+
+<table border="1">
+    <tr>
+        <th>Title</th>
+
+        <th>Publication date</th>
+        <th>published</th>
+        <th>category</th>
+
+        <th>author</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr>  {% for b in publishedBooks %} </tr>
+    <td>{{ b.title }}</td>
+    <td>{{ b.publishedDate | date('M-d-Y') }}</td>
+    <td> {{b.published }}</td>
+
+    <td> {{b.category }}</td>
+    <td>{{ b.author.username }}</td>
+    <td>
+        <a href="{{ path("book_edit",{'id':b.id})}}">edit</a>   
+        <a href="{{ path("book_delete",{'id':b.id})}}">delete</a>
+        <a href="{{ path("showDetails",{'id':b.id})}}">show</a>
+    </td>
+    
+
+    {% endfor %}
+
+    <p>Number of published books : {{ numPublishedBooks }}</p>
+    <p>Number of Unpublished books : {{ numUnPublishedBooks }}</p>
+
+</table>
+{% else %}
+<h1>no books found</h1>
+{% endif %}
